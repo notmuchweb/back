@@ -348,7 +348,12 @@ export class NotMuchService implements INotMuchService {
 
   public getTags(includeSpamThread:boolean): string[] {
     //    const promise1 = new Promise<string[]>((resolve, reject) => {
-    if (includeSpamThread === true) {
+      let includeSpamThreadb = includeSpamThread
+      if (typeof includeSpamThread === 'string'){
+        includeSpamThreadb = (includeSpamThread === "true");
+      }
+  
+    if (includeSpamThreadb ) {
       return (('' + childProcess.execSync(this.notmuchpath + ' search --exclude=false --output=tags \'*\'')).split('\n').filter(el => el !== ''));
     } else {
       return(('' + childProcess.execSync(this.notmuchpath + ' search --exclude=true --output=tags \'*\'')).split('\n').filter(el => el !== ''));
@@ -422,7 +427,12 @@ export class NotMuchService implements INotMuchService {
   }
 
   public getThread(query: string, offset: number, rows: number,includeSpamThread:boolean) : Thread[]{
-    if (includeSpamThread === true) {
+    let includeSpamThreadb = includeSpamThread
+    if (typeof includeSpamThread === 'string'){
+      includeSpamThreadb = (includeSpamThread === "true");
+    }
+
+    if (includeSpamThreadb) {
       const stdout = childProcess.execFileSync(this.notmuchpath, ('search --exclude=false --format=json' + ' --offset=' + (offset) + ' --limit=' + rows + ' ' + query).split(' '));
       return (<Thread[]>JSON.parse(`${stdout}`));
     } else {
