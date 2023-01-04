@@ -1,0 +1,12 @@
+{
+  "extends": "fastify-tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+//        "inlineSourceMap": true,  // <!-- here
+
+  },
+  "include": ["src/**/*.ts"]
+}
