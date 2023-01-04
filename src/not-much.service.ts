@@ -264,9 +264,8 @@ export class NotMuchService implements INotMuchService {
     return this.froms;
   }
 
-  private getDirectories(path1: string): string[] {
-    log.info(path1);
-    let res = this.getAccountDirectories(path1);
+  public getDirectories(): string[] {
+    let res = this.getAccountDirectories(this.localmailfolder);
     const subfolder: string[] = [];
     res.forEach(e => {
       const res1 = this.getFolderDirectories(this.localmailfolder + '/' + e);
@@ -371,7 +370,7 @@ export class NotMuchService implements INotMuchService {
 
 
   public getMailFolder(): TreeNode[] {
-    const paths = this.getDirectories(this.localmailfolder);
+    const paths = this.getDirectories();
     const res: TreeNode[] = [];
     const cache: Map<string, TreeNode> = new Map();
 

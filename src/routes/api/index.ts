@@ -259,9 +259,16 @@ const api: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     reply.send(api1.getConfig());
   });
 
+  fastify.get<{
+    Reply: string[]
+  }>('/getDirectories', async (request, reply) => {
+    reply.send(api1.getDirectories());
+  });
+
+  
 
   fastify.get('/', async function (request, reply) {
-    return 'this is an example'
+    return ''
   })
 }
 

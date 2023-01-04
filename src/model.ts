@@ -118,6 +118,7 @@ export interface FileContentDTO {
 export interface NotMuchConfig {
   smtpaccounts?:       Smtpaccount[];
   defaultquery?:       string;
+  localmailfoldermultiaccounts?: boolean;
   shortcutqueries?:    Shortcutquery[];
   shortcutmailtyping?: Shortcutmailtyping[];
   colortags?:          Colortag[];

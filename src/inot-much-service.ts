@@ -23,6 +23,7 @@ export interface INotMuchService{
   replyAll(messageid: string): MailVM ;
   download(messageid: string, partid:number): string ;
   getConfig():NotMuchConfig;
+  getDirectories(): string[];
   
 
   
