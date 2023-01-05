@@ -10,10 +10,10 @@
     "test": "npm run build:ts && tsc -p test/tsconfig.json && tap --ts \"test/**/*.test.ts\"",
     "start": "npm run build:ts && node --enable-source-maps  node_modules/fastify-cli/cli.js start -l info dist/app.js",
     "build:ts": "tsc",
-    "prod": "(trap 'kill 0' INT; sleep 1 && google-chrome --app-url \"http://localhost:3000\" & node --enable-source-maps  node_modules/fastify-cli/cli.js start dist/app.js & wait)",
+    "prod": "(trap 'kill 0' INT; sleep 1 && google-chrome --app-url \"http://localhost:3000\" & CONFIG=config.json  node --enable-source-maps  node_modules/fastify-cli/cli.js start dist/app.js & wait)",
     "watch:ts": "tsc -w",
     "dev": "npm run build:ts && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
-    "dev:start": "node --enable-source-maps  node_modules/fastify-cli/cli.js start --ignore-watch=.ts$ -w -l info -P dist/app.js"
+    "dev:start": "CONFIG=config.json node --enable-source-maps  node_modules/fastify-cli/cli.js start --ignore-watch=.ts$ -w -l info -P dist/app.js"
   },
   "keywords": [],
   "author": "",

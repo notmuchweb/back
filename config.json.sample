@@ -1,0 +1,97 @@
+{
+  "smtpaccounts": [{
+      "name": "irisa",
+      "transport": {
+        "sendmail": true,
+        "newline": "unix",
+        "path": "/usr/bin/msmtp"
+      },
+      "from": "barais@irisa.fr",
+      "signature": "Olivier Barais <BR> Equipe INRIA DiverSE <BR> Université de Rennes 1, INRIA, IRISA",
+      "sentfolder": "IRISA/Sent",
+      "draftfolder": "IRISA/Drafts"
+    }, {
+      "name": "rennes1",
+      "transport": {
+        "sendmail": true,
+        "newline": "unix",
+        "args": ["-a", "rennes1"],
+        "path": "/usr/bin/msmtp"
+      },
+      "from": "olivier.barais@univ-rennes1.fr",
+      "signature": "Olivier Barais <BR> Equipe INRIA DiverSE <BR> Université de Rennes 1, INRIA, IRISA",
+      "sentfolder": "IRISA/Sent",
+      "draftfolder": "IRISA/Drafts"
+    }
+
+  ],
+  "imapaccounts": [{
+    "name": "inria",
+    "user": "barais",
+    "password": "/usr/bin/gpg2 -q --for-your-eyes-only --no-tty -d ~/mail/zimbra.inria.fr.gpg",
+    "host": "zimbra.inria.fr",
+    "port": 993,
+    "tls": true
+  }
+  ],
+  "defaultoutputfolder": "IRISA/Outbox",
+  "notmuchpath": "/usr/bin/notmuch",
+  "base64path": "/usr/bin/base64",
+  "notmuchaddresspath": "/usr/bin/notmuch-addrlookup",
+  "mktemppath": "/bin/mktemp",
+  "localmailfolder": "/home/barais/mail",
+  "localmailfoldermultiaccounts": true,
+  "defaultquery": "path:IRISA/INBOX/**",
+  "tmpfilepath": "/tmp/titi.XXXXXXX",
+  "defautEventMailInvit": "barais@irisa.fr",
+  "defautEventMailCalendar": "olivier.barais@irisa.fr",
+  "defautICSUser": "Olivier Barais",
+  "rtm": {
+    "API_KEY": "TODOSET",
+    "API_SECRET": "TODOSET"
+  },
+  "shortcutqueries": [
+    {
+      "shortcut": "g i",
+      "query": "path:IRISA/INBOX/**"
+    },
+    {
+      "shortcut": "g t",
+      "query": "path:INBOX/** tag:todo"
+    },
+    {
+      "shortcut": "g l",
+      "query": "path:IRISA/INBOX/** -tag:lists"
+    },
+    {
+      "shortcut": "g g",
+      "query": "path:gmail/INBOX** -tag:list"
+    }    
+
+  ],
+  "shortcutmailtyping": [
+    {
+      "shortcut": "cor",
+      "formula": "Cordialement,"
+    },
+    {
+      "shortcut": "sin",
+      "formula": "Sincèrement,"
+    },
+    {
+      "shortcut": "bes",
+      "formula": "Best regards,"
+    }
+  ],
+  "colortags": [
+    {
+      "tags": "todo",
+      "color": "red"
+    },
+    {
+      "tags": "replied",
+      "color": "blue"
+    }
+  ]
+
+}

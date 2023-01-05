@@ -2,7 +2,6 @@ import {Thread,TreeNode, Mail, MailVM, AttachmentICSForward, AttachmentForward, 
 import INotMuchService from './inot-much-service';
 import nodemailer from 'nodemailer';
 import jsel from 'jsel';   
-import * as path from 'path';  
 import { v4 as uuid } from 'uuid';
 import { RtmService } from './rtm.service';
 
@@ -75,8 +74,7 @@ export class NotMuchService implements INotMuchService {
     });
 
     this.rtmservice = new RtmService();
-    const userDataPath = this.getPath('userData');
-    this.path = path.join(userDataPath, 'config.json');
+    this.path = this.getConfigPath();
     this.data = this.parseDataFile(this.path, {
       'smtpaccounts': [{
         'name': 'rennes1',
@@ -239,11 +237,12 @@ export class NotMuchService implements INotMuchService {
     this.intervalOutbox = setInterval(() => this.flushOutBox(), 120 * 1000);
 
   }
-  private getPath(arg0: string):string {
-    if (arg0 === "userData"){
-      return "/home/barais/oldhome/.config/electron-angular-native/"
-    }
-    throw new Error('Method not implemented.');
+  private getConfigPath():string {
+    const CONFIG = process.env.CONFIG || "./config.json";
+    log.info(CONFIG)
+
+      return CONFIG
+    
   }
 
   private parseDataFile(filePath: string, defaults: { smtpaccounts: { name: string; transport: { sendmail: boolean; newline: string; args: string[]; path: string; }; from: string; signature: string; sentfolder: string; draftfolder: string; }[]; imapaccounts: { name: string; user: string; password: string; host: string; port: number; tls: boolean; }[]; defaultoutputfolder: string; notmuchpath: string; base64path: string; notmuchaddresspath: string; mktemppath: string; localmailfolder: string; localmailfoldermultiaccounts: boolean; defaultquery: string; tmpfilepath: string; defautEventMailInvit: string; defautEventMailCalendar: string; defautICSUser: string; shortcutqueries: { shortcut: string; query: string; }[]; shortcutmailtyping: { shortcut: string; formula: string; }[]; colortags: { tags: string; color: string; }[]; }) {

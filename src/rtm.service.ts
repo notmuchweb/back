@@ -1,4 +1,3 @@
-import * as path from 'path';
 
 import * as fs from 'fs';
 import RTM from 'rtm-api'
@@ -27,16 +26,14 @@ export class RtmService {
 
     this.rtmclient = new RTM(this.API_KEY, this.API_SECRET, RTM.PERM_WRITE); // An instance of RTMClient
 
-    const userDataPath = this.getPath('userData');
-    this.path = path.join(userDataPath, 'rtmconfig.json');
+    this.path = this.getConfigPath();
     this.parseRTMConfigFile(this.path);
 
   }
-  getPath(arg0: string) :string {
-    if (arg0 === "userData"){
-      return "/home/barais/oldhome/.config/electron-angular-native/"
-    }
-    throw new Error('Method not implemented.');
+  getConfigPath() :string {
+    const CONFIG = process.env.CONFIG || "./rtmconfig.json";
+   
+      return CONFIG
   }
 
   parseRTMConfigFile(filePath: string) {
@@ -137,8 +134,7 @@ export class RtmService {
           this.token = user;
 
           this.rtmclient.user.import(this.token);
-          const userDataPath = this.getPath('userData');
-          const path1 = path.join(userDataPath, 'rtmconfig.json');
+          const path1 = this.getConfigPath();
           this.saveRTMConfigFile(path1);
           this.validtoken = true;
           // Save the user for making authenticated API calls via user.get()
